@@ -1,0 +1,127 @@
+:root {
+  --bg: #ffffff;
+  --text: #213547;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --primary: #3b82f6;
+  --card: #ffffff;
+  --button-bg: #f9f9f9;
+  --button-hover-border: #93c5fd;
+
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root[data-theme='light'] {
+  --bg: #ffffff;
+  --text: #213547;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --primary: #3b82f6;
+  --card: #ffffff;
+  --button-bg: #f9f9f9;
+  --button-hover-border: #93c5fd;
+}
+
+:root[data-theme='dark'] {
+  --bg: #0b1220;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --border: #334155;
+  --primary: #60a5fa;
+  --card: #0f172a;
+  --button-bg: #0f172a;
+  --button-hover-border: #60a5fa;
+}
+
+a {
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: inherit;
+}
+a:hover {
+  opacity: 0.9;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  padding: 0.6em 1.0em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--button-bg);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s, opacity 0.2s;
+}
+button:hover {
+  border-color: var(--button-hover-border);
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+ /* Light/Dark palettes using prefers-color-scheme */
+ @media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1220;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --border: #334155;
+    --primary: #60a5fa;
+    --card: #0f172a;
+    --button-bg: #0f172a;
+    --button-hover-border: #60a5fa;
+  }
+ }
+
+ /* Layout helpers */
+ nav {
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+ }
+
+ .container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px;
+ }
+
+ .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+ }
+
+ .card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+ }
