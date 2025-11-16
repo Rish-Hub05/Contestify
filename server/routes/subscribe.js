@@ -3,7 +3,7 @@ const Subscription = require('../models/Subscription')
 
 router.post('/', async (req, res) => {
   try {
-    const { email, contestId, contestName, notifyBeforeMinutes = 60, contestStartTime } = req.body || {}
+    const { email, contestId, contestName, notifyBeforeMinutes = 60, contestStartTime, contestUrl } = req.body || {}
     if (!email || !contestId || !contestName || !contestStartTime) {
       return res.status(400).json({ ok: false, error: 'Missing required fields' })
     }
@@ -20,11 +20,21 @@ router.post('/', async (req, res) => {
       existing.notifyAt = notifyAt
       existing.sent = false
       existing.contestName = contestName
+      existing.contestUrl = contestUrl
+      existing.contestStartTime = new Date(startMs)
       await existing.save()
       return res.json({ ok: true, subscription: existing })
     }
 
-    const sub = await Subscription.create({ email, contestId, contestName, notifyAt, sent: false })
+    const sub = await Subscription.create({
+      email,
+      contestId,
+      contestName,
+      contestUrl,
+      contestStartTime: new Date(startMs),
+      notifyAt,
+      sent: false,
+    })
     return res.json({ ok: true, subscription: sub })
   } catch (e) {
     return res.status(500).json({ ok: false, error: 'Failed to create subscription' })

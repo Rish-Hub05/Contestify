@@ -12,10 +12,23 @@ function startCron() {
       const due = await Subscription.find({ notifyAt: { $lte: now }, sent: false }).limit(100)
       for (const s of due) {
         try {
+          const startText = s.contestStartTime
+            ? new Date(s.contestStartTime).toLocaleString()
+            : 'soon'
+          const linkHtml = s.contestUrl
+            ? `<p>Link: <a href="${s.contestUrl}">${s.contestUrl}</a></p>`
+            : ''
+          const bodyHtml = `
+            <p>Hi,</p>
+            <p>This is a reminder that the contest <strong>${s.contestName}</strong> starts at <strong>${startText}</strong>.</p>
+            ${linkHtml}
+            <p>Good luck!</p>
+          `
+
           const info = await sendNotification(
             s.email,
             `Contest Reminder: ${s.contestName}`,
-            `<p>Contest <strong>${s.contestName}</strong> starts soon.</p>`
+            bodyHtml
           )
           const accepted = Array.isArray(info?.accepted) ? info.accepted : []
           const rejected = Array.isArray(info?.rejected) ? info.rejected : []

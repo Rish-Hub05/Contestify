@@ -21,6 +21,7 @@ export default function ContestCard({ name, url, site, start_time, end_time, onB
         contestName: name,
         notifyBeforeMinutes,
         contestStartTime: start_time,
+        contestUrl: url,
       })
       setShowRemind(false)
       alert('Subscribed! You will receive an email reminder.')
